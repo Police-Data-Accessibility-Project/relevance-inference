@@ -1,0 +1,16 @@
+# .github/workflows/sync-to-hf.yml
+name: Sync to Hugging Face
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Push to Hugging Face
+        run: |
+          git remote add hf https://<HF_USERNAME>:<HF_TOKEN>@huggingface.co/<HF_USERNAME>/<REPO_NAME>
+          git push hf main
