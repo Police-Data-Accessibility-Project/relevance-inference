@@ -1,16 +1,11 @@
 from typing import Dict, Any
 
 import spacy
-from sklearn.datasets import make_classification
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
+from environs import Env
 from huggingface_hub import hf_hub_download
 from joblib import load
 
 SPACY_MODEL = spacy.load('en_core_web_trf', disable=['parser'])  # Largest, slowest, most accurate model
-
-from environs import Env
-
 
 
 
