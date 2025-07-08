@@ -14,14 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # <-- this is the fix
+          fetch-depth: 0  
+          lfs: true  
 
       - name: Set up Git LFS
-        run: |
-          git lfs install
-      
-      - name: Pull LFS objects (if needed)
-        run: git lfs pull
+        run: git lfs install
+
+      - name: Verify model file is present
+        run: ls -lh model/
 
       - name: Push to Hugging Face
         run: |
