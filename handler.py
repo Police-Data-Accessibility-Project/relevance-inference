@@ -1,11 +1,11 @@
 from typing import Dict, Any
 
-import en_core_web_trf
+import spacy
 from environs import Env
 from huggingface_hub import hf_hub_download
 from joblib import load
 
-SPACY_MODEL = en_core_web_trf.load()
+SPACY_MODEL = spacy.load('en_core_web_trf', disable=['parser'])  # Largest, slowest, most accurate model
 
 
 
