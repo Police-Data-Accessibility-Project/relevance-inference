@@ -19,6 +19,9 @@ jobs:
       - name: Set up Git LFS
         run: |
           git lfs install
+      
+      - name: Pull LFS objects (if needed)
+        run: git lfs pull
 
       - name: Push to Hugging Face
         run: |
