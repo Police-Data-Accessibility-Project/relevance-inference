@@ -19,4 +19,4 @@ jobs:
           git config --global user.email "operations@pdap.io"
           git config --global user.name "Sync to Hugging Face GitHub Action"
           git remote add hf https://PDAP:${HF_TOKEN}@huggingface.co/PDAP/inference_prototype_test
-          git push hf main
+          git push hf main --force
