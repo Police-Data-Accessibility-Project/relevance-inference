@@ -1,11 +1,11 @@
 from typing import Dict, Any
-from sklearn.model_selection import train_test_split
 
+import spacy
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
 
+SPACY_MODEL = spacy.load('en_core_web_trf', disable=['parser'])  # Largest, slowest, most accurate model
 
 
 class EndpointHandler:
