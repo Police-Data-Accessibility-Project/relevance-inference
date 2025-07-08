@@ -16,7 +16,7 @@ jobs:
 
       - name: Push to Hugging Face
         run: |
-          git config --global user.email "ci@example.com"
-          git config --global user.name "CI Bot"
+          git config --global user.email "operations@pdap.io"
+          git config --global user.name "Sync to Hugging Face GitHub Action"
           git remote add hf https://PDAP:${HF_TOKEN}@huggingface.co/PDAP/inference_prototype_test
           git push hf main
