@@ -3,11 +3,21 @@ name = "inference-prototype-test"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = [
+    "beautifulsoup4>=4.13.4",
     "environs>=14.2.0",
     "huggingface-hub>=0.33.2",
+    "lxml>=6.0.0",
+    "pip>=25.1.1",
+    "polars>=1.31.0",
+    "pydantic>=2.11.7",
     "scikit-learn>=1.7.0",
     "spacy>=3.8.7",
     "spacy-huggingface-hub>=0.0.10",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
 ]

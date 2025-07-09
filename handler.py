@@ -5,8 +5,12 @@ from environs import Env
 from huggingface_hub import hf_hub_download
 from joblib import load
 
-SPACY_MODEL = spacy.load('en_core_web_trf', disable=['parser'])  # Largest, slowest, most accurate model
+from src.models.bag_of_words.model import BagOfWordsModelContainer
+from src.extract.core import BagOfWordsExtractor
+from src.format.core import BagOfWordsFormatter
+from src.predict.core import RelevancePredictor
 
+SPACY_MODEL = spacy.load('en_core_web_trf', disable=['parser'])  # Largest, slowest, most accurate model
 
 
 class EndpointHandler:
@@ -20,9 +24,14 @@ class EndpointHandler:
             subfolder=model_path,
             filename="model.joblib"
         )
-        self.model = load(downloaded_model_path)
+        self.model_container: BagOfWordsModelContainer = load(downloaded_model_path)
+        self.extractor = BagOfWordsExtractor(self.model_container.permitted_terms)
+        self.formatter = BagOfWordsFormatter(self.model_container.term_label_encoder)
+        self.predictor = RelevancePredictor(self.model_container.model)
 
     def __call__(self, inputs: Dict[str, Any]) -> Dict[str, str]:
-        # Expecting input like: {"inputs": "<html>...</html>"}
         html = inputs["inputs"]
-        return {"label": str(self.model)}
+        bag_of_words = self.extractor.extract_bag_of_words(html)
+        csr = self.formatter.format_bag_of_words(bag_of_words)
+        output = self.predictor.predict_relevance(csr)
+        return output.model_dump(mode="json")
