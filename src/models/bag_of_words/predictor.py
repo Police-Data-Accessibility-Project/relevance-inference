@@ -1,6 +1,6 @@
 from scipy.sparse import csr_matrix
 
-from src.predict.output import PredictionOutput
+from src.models._shared.object.output import PredictionOutput
 from types_ import FitPredictor
 
 
